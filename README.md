@@ -1,6 +1,6 @@
 # VectorRytov
 
-Demo codes associated to the paper "Extending the Rytov Approximation to Vector Waves for the Tomography of Anisotropic Materials" 
+Demo codes associated with the paper "Extending the Rytov Approximation to Vector Waves for the Tomography of Anisotropic Materials". 
 
 Please download all files in this repository before downloading the dataset from zenodo
 and run
