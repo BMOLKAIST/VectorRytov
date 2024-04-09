@@ -9,6 +9,9 @@ V0 = gpuArray(single(zeros(3,3,coordinates.Nx,coordinates.Nx,iter)));
 A = gpuArray(single(zeros(3,3,coordinates.Nx,coordinates.Nx,iter)));
 B = gpuArray(single(zeros(3,3,1,1,iter)));
 Uz = gpuArray(single(zeros(1,1,coordinates.Nx,coordinates.Nx,iter)));
+if ~use_cuda
+    mask = gpuArray(single(zeros(1,1,coordinates.Nx,coordinates.Nx,iter)));
+end
 ref = [];
 
 
@@ -76,6 +79,9 @@ for idx = 1:iter
     A(:,:,:,:,idx) = Green_Dyadic(coordinates, constant, uin);
     B(:,:,1,1,idx) = (eye(3)-uin*transpose(uin)/(transpose(uin)*uin));
     Uz(1,1,:,:,idx) = Q;
+    if ~use_cuda
+        mask(1,1,:,:,idx) = NAmask;
+    end
 end
 
 %% parameters for gradient descent and CUDA
@@ -129,7 +135,7 @@ for epoch = 1:num_epoch
         G = zeros(3,3,coordinates.Nx,coordinates.Nx,coordinates.Nz,'single','gpuArray')+1i;
         for idx = 1:iter
             exp_factor=exp(1i*2*pi*Uz(1,1,:,:,idx).*z);
-            G = G + exp_factor.*pagemtimes(pagemtimes(A(:,:,:,:,idx),sum(conj(exp_factor).*Vp,5)-V0(:,:,:,:,idx)),B(:,:,:,:,idx));
+            G = G + mask(1,1,:,:,idx).*exp_factor.*pagemtimes(pagemtimes(A(:,:,:,:,idx),sum(conj(exp_factor).*Vp,5)-V0(:,:,:,:,idx)),B(:,:,:,:,idx));
         end
         G = (G + pagetranspose(G))/2;
     else
