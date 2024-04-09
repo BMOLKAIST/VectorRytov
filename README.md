@@ -1,6 +1,6 @@
 # VectorRytov
 
-Demo codes associated with the paper "Extending the Rytov Approximation to Vector Waves for the Tomography of Anisotropic Materials". 
+Demo codes associated with the paper "Rytov Approximation of Vector Waves by Modifying Scattering Matrices: Precise Reconstruction of Dielectric Tensor Tomography". 
 
 Please download all files in this repository before downloading the dataset from google drive
 (https://drive.google.com/drive/folders/12nEj2LzxdJvx_EUq2GvkdWJwvtkllWV9?usp=drive_link)
