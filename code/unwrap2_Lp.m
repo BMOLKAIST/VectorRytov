@@ -70,7 +70,7 @@ while true
         %%% 10
         if iterN > iterMax
 
-            phi_uw_iter = phi_uw_iter + unwrapp2_gpu(testPhase);
+            phi_uw_iter = phi_uw_iter;% + unwrapp2_gpu(testPhase);
             disp("max iteration no is reached")
             break;
         end
